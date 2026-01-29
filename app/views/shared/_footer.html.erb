@@ -1,0 +1,38 @@
+<footer class="bg-gray-800 text-white">
+  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="col-span-1 md:col-span-2">
+        <h3 class="text-lg font-bold mb-4">Shopify Clone Platform</h3>
+        <p class="text-gray-300 text-sm">
+          Create your own online store and start selling products today. Join thousands of merchants who trust our platform.
+        </p>
+      </div>
+      
+      <div>
+        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><%= link_to 'Home', root_path, class: "text-gray-300 hover:text-white text-sm" %></li>
+          <li><%= link_to 'Products', products_path, class: "text-gray-300 hover:text-white text-sm" %></li>
+          <li><%= link_to 'Stores', stores_path, class: "text-gray-300 hover:text-white text-sm" %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to 'Dashboard', dashboard_path, class: "text-gray-300 hover:text-white text-sm" %></li>
+          <% end %>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Support</h4>
+        <ul class="space-y-2">
+          <li><%= link_to 'Help Center', '#', class: "text-gray-300 hover:text-white text-sm" %></li>
+          <li><%= link_to 'Contact Us', '#', class: "text-gray-300 hover:text-white text-sm" %></li>
+          <li><%= link_to 'Privacy Policy', '#', class: "text-gray-300 hover:text-white text-sm" %></li>
+          <li><%= link_to 'Terms of Service', '#', class: "text-gray-300 hover:text-white text-sm" %></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="mt-8 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
+      <p>&copy; <%= Date.current.year %> Shopify Clone Platform. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

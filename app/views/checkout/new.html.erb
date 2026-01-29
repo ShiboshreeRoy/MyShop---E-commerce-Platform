@@ -1,0 +1,204 @@
+<div class="bg-white">
+  <div class="max-w-3xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-extrabold tracking-tight text-gray-900">Checkout</h1>
+
+    <div class="mt-12">
+      <%= form_with(model: @order, url: checkout_path, local: true, method: :post, class: "lg:grid lg:grid-cols-2 lg:gap-x-12") do |form| %>
+        <div class="lg:col-span-1">
+          <div class="mb-10">
+            <h2 class="text-lg font-medium text-gray-900">Contact information</h2>
+            <div class="mt-4">
+              <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+              <input type="email" id="email" name="email" value="<%= current_user.email %>" class="mt-1 block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+            </div>
+          </div>
+
+          <div class="border-t border-gray-200 pt-10">
+            <h2 class="text-lg font-medium text-gray-900">Shipping address</h2>
+
+            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-y-6 sm:gap-x-4">
+              <div class="sm:col-span-2">
+                <label for="address-street" class="block text-sm font-medium text-gray-700">Street address</label>
+                <div class="mt-1">
+                  <%= form.text_field :shipping_address, value: '', placeholder: "1234 Main St", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+
+              <div class="sm:col-span-2">
+                <label for="address-apartment" class="block text-sm font-medium text-gray-700">Apartment, suite, etc.</label>
+                <div class="mt-1">
+                  <%= form.text_field :shipping_address, value: '', placeholder: "Apt, suite, unit, building, floor, etc.", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+
+              <div>
+                <label for="address-city" class="block text-sm font-medium text-gray-700">City</label>
+                <div class="mt-1">
+                  <%= form.text_field :shipping_address, value: '', placeholder: "City", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+
+              <div>
+                <label for="address-state" class="block text-sm font-medium text-gray-700">State / Province</label>
+                <div class="mt-1">
+                  <%= form.text_field :shipping_address, value: '', placeholder: "State", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+
+              <div>
+                <label for="address-zip" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
+                <div class="mt-1">
+                  <%= form.text_field :shipping_address, value: '', placeholder: "ZIP", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+
+              <div>
+                <label for="address-country" class="block text-sm font-medium text-gray-700">Country</label>
+                <div class="mt-1">
+                  <%= form.text_field :shipping_address, value: 'US', placeholder: "Country", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-200 pt-10">
+            <h2 class="text-lg font-medium text-gray-900">Billing address</h2>
+            <div class="mt-6">
+              <div class="flex items-center h-5">
+                <input id="same-as-shipping" name="same-as-shipping" type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="same-as-shipping" class="font-medium text-gray-700">Same as shipping address</label>
+              </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-y-6 sm:gap-x-4 hidden">
+              <div class="sm:col-span-2">
+                <label for="billing-address-street" class="block text-sm font-medium text-gray-700">Street address</label>
+                <div class="mt-1">
+                  <%= form.text_field :billing_address, value: '', placeholder: "1234 Main St", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+
+              <div class="sm:col-span-2">
+                <label for="billing-address-apartment" class="block text-sm font-medium text-gray-700">Apartment, suite, etc.</label>
+                <div class="mt-1">
+                  <%= form.text_field :billing_address, value: '', placeholder: "Apt, suite, unit, building, floor, etc.", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+
+              <div>
+                <label for="billing-address-city" class="block text-sm font-medium text-gray-700">City</label>
+                <div class="mt-1">
+                  <%= form.text_field :billing_address, value: '', placeholder: "City", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+
+              <div>
+                <label for="billing-address-state" class="block text-sm font-medium text-gray-700">State / Province</label>
+                <div class="mt-1">
+                  <%= form.text_field :billing_address, value: '', placeholder: "State", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+
+              <div>
+                <label for="billing-address-zip" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
+                <div class="mt-1">
+                  <%= form.text_field :billing_address, value: '', placeholder: "ZIP", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+
+              <div>
+                <label for="billing-address-country" class="block text-sm font-medium text-gray-700">Country</label>
+                <div class="mt-1">
+                  <%= form.text_field :billing_address, value: 'US', placeholder: "Country", class: "block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order summary -->
+        <div class="border-t border-gray-200 pt-10 lg:col-span-1 lg:border-none lg:pt-0">
+          <div class="max-w-lg mx-auto lg:max-w-none">
+            <h2 class="text-lg font-medium text-gray-900">Order summary</h2>
+
+            <div class="mt-6 space-y-4">
+              <% @cart_items.each do |item| %>
+                <div class="flex justify-between text-base font-medium text-gray-900">
+                  <p><%= item.product_variant.display_name %></p>
+                  <p>$<%= item.total_price %></p>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="mt-6 space-y-4">
+              <div class="flex justify-between">
+                <p class="text-sm text-gray-600">Subtotal</p>
+                <p class="text-sm font-medium text-gray-900">$<%= @cart.subtotal %></p>
+              </div>
+              <div class="flex justify-between">
+                <p class="text-sm text-gray-600">Shipping</p>
+                <p class="text-sm font-medium text-gray-900">$0.00</p>
+              </div>
+              <div class="flex justify-between">
+                <p class="text-sm text-gray-600">Taxes</p>
+                <p class="text-sm font-medium text-gray-900">$0.00</p>
+              </div>
+              <div class="flex items-center justify-between border-t border-gray-200 pt-4 text-lg">
+                <p class="font-medium text-gray-900">Order total</p>
+                <p class="font-medium text-gray-900">$<%= @total %></p>
+              </div>
+            </div>
+
+            <div class="mt-10">
+              <h2 class="text-lg font-medium text-gray-900">Payment</h2>
+
+              <div class="mt-6 grid grid-cols-4 gap-4">
+                <div class="col-span-4">
+                  <label for="card-number" class="block text-sm font-medium text-gray-700">Card number</label>
+                  <div class="mt-1">
+                    <input type="text" id="card-number" name="payment[number]" autocomplete="cc-number" class="block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  </div>
+                </div>
+
+                <div class="col-span-3">
+                  <label for="card-expiry" class="block text-sm font-medium text-gray-700">Expiry date (MM/YY)</label>
+                  <div class="mt-1">
+                    <input type="text" id="card-expiry" name="payment[expiry]" autocomplete="cc-exp" class="block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  </div>
+                </div>
+
+                <div>
+                  <label for="card-cvc" class="block text-sm font-medium text-gray-700">CVC</label>
+                  <div class="mt-1">
+                    <input type="text" id="card-cvc" name="payment[cvc]" autocomplete="cc-csc" class="block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  </div>
+                </div>
+
+                <div class="col-span-4">
+                  <label for="card-name" class="block text-sm font-medium text-gray-700">Name on card</label>
+                  <div class="mt-1">
+                    <input type="text" id="card-name" name="payment[name]" autocomplete="cc-name" class="block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <%= form.hidden_field :special_instructions, value: '' %>
+              <%= form.submit "Complete Order", class: "w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50" %>
+            </div>
+
+            <div class="mt-6 flex justify-center text-sm text-center text-gray-500">
+              <p>
+                or
+                <%= link_to 'Continue Shopping', products_path, class: "font-medium text-indigo-600 hover:text-indigo-500" %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

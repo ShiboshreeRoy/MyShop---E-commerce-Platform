@@ -1,0 +1,44 @@
+<nav class="bg-white shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex items-center">
+        <%= link_to root_path, class: "flex-shrink-0 flex items-center" do %>
+          <span class="text-xl font-bold text-indigo-600">Shopify Clone</span>
+        <% end %>
+        
+        <div class="hidden md:ml-6 md:flex md:space-x-8">
+          <%= link_to 'Home', root_path, class: "text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium" %>
+          <%= link_to 'Products', products_path, class: "text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium" %>
+          <%= link_to 'Stores', stores_path, class: "text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium" %>
+          <% if user_signed_in? %>
+            <%= link_to 'My Dashboard', dashboard_path, class: "text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium" %>
+          <% end %>
+        </div>
+      </div>
+      
+      <div class="flex items-center">
+        <div class="flex items-center space-x-4">
+          <% if user_signed_in? %>
+            <span class="text-sm text-gray-700">Welcome, <%= current_user.email.split('@').first %></span>
+            <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete }, class: "text-sm text-gray-500 hover:text-gray-700" %>
+          <% else %>
+            <%= link_to 'Login', new_user_session_path, class: "text-sm text-gray-500 hover:text-gray-700" %>
+            <%= link_to 'Sign Up', new_user_registration_path, class: "ml-4 text-sm text-gray-500 hover:text-gray-700" %>
+          <% end %>
+          
+          <% if user_signed_in? %>
+            <div class="relative ml-3">
+              <% if current_user.merchant? || current_user.admin? %>
+                <%= link_to 'Create Store', new_store_path, class: "inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700" %>
+              <% end %>
+            </div>
+            
+            <% if current_user.admin? %>
+              <%= link_to 'Admin', rails_admin_path, class: "ml-2 text-sm text-gray-500 hover:text-gray-700" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

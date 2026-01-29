@@ -1,0 +1,73 @@
+<div class="bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <% if @store.cover_image.attached? %>
+      <div class="mb-6 rounded-lg overflow-hidden h-64">
+        <%= image_tag url_for(@store.cover_image), class: "w-full h-full object-cover" %>
+      </div>
+    <% end %>
+    
+    <div class="border-b border-gray-200 pb-6">
+      <div class="flex items-start justify-between py-6">
+        <div class="flex items-center">
+          <% if @store.logo.attached? %>
+            <%= image_tag url_for(@store.logo), class: "h-16 w-16 object-contain mr-4" %>
+          <% else %>
+            <div class="h-16 w-16 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+              <span class="text-xl font-bold text-gray-700"><%= @store.name.first.upcase %></span>
+            </div>
+          <% end %>
+          <div>
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900"><%= @store.name %></h1>
+            <p class="text-gray-500 mt-1"><%= @store.description %></p>
+          </div>
+        </div>
+        
+        <div class="flex space-x-4">
+          <% if user_signed_in? && @store.user == current_user %>
+            <%= link_to 'Edit Store', edit_store_path(@store), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pt-6">
+      <h2 class="text-2xl font-bold tracking-tight text-gray-900">Products</h2>
+      
+      <% if @products.any? %>
+        <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          <% @products.each do |product| %>
+            <div class="group relative bg-white border border-gray-200 rounded-lg shadow-sm">
+              <div class="w-full min-h-80 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                <% if product.featured_image %>
+                  <%= image_tag url_for(product.featured_image), class: "w-full h-full object-cover lg:h-full lg:w-full" %>
+                <% else %>
+                  <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-48 flex items-center justify-center text-gray-500">
+                    No Image
+                  </div>
+                <% end %>
+              </div>
+              <div class="mt-4 px-4 pb-4">
+                <h3 class="text-sm text-gray-700 font-medium">
+                  <%= link_to product.name, product_path(product) %>
+                </h3>
+                <p class="mt-1 text-sm text-gray-500 truncate"><%= product.short_description&.truncate(50) %></p>
+                
+                <div class="mt-4 flex justify-between items-center">
+                  <p class="text-base font-medium text-gray-900">$<%= product.price %></p>
+                  <%= link_to 'View Details', product_path(product), class: "inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="mt-8 text-center">
+          <p class="text-gray-500">No products available in this store yet.</p>
+          <% if user_signed_in? && @store.user == current_user %>
+            <%= link_to 'Add Your First Product', new_product_path, class: "mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

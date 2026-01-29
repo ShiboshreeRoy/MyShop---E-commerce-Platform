@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Shopify Clone" %> | E-commerce Platform</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Shopify Clone E-commerce">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <div class="min-h-screen flex flex-col bg-gray-50">
+      <!-- Toast Container -->
+      <div id="toast-container" class="fixed inset-0 flex items-start justify-end pointer-events-none z-50 p-4 space-y-2"></div>
+      
+      <!-- Header -->
+      <%= render "shared/navbar" %>
+      
+      <!-- Main Content -->
+      <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <% if notice %>
+          <div class="toast-item transform transition-all duration-300 ease-in-out opacity-0 translate-y-2 p-4 rounded-lg shadow-lg text-white max-w-xs pointer-events-auto mb-2 bg-green-500" data-controller="toast" data-toast-message-value="<%= notice %>" data-toast-type-value="success">
+            <div class="flex items-start">
+              <div class="flex-1">
+                <p class="text-sm font-medium"><%= notice %></p>
+              </div>
+              <button class="ml-4 text-white hover:text-gray-200 focus:outline-none" onclick="this.closest('.toast-item').remove()">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        <% end %>
+        
+        <% if alert %>
+          <div class="toast-item transform transition-all duration-300 ease-in-out opacity-0 translate-y-2 p-4 rounded-lg shadow-lg text-white max-w-xs pointer-events-auto mb-2 bg-red-500" data-controller="toast" data-toast-message-value="<%= alert %>" data-toast-type-value="error">
+            <div class="flex items-start">
+              <div class="flex-1">
+                <p class="text-sm font-medium"><%= alert %></p>
+              </div>
+              <button class="ml-4 text-white hover:text-gray-200 focus:outline-none" onclick="this.closest('.toast-item').remove()">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        <% end %>
+        
+        <%= yield %>
+      </main>
+      
+      <!-- Footer -->
+      <%= render "shared/footer" %>
+      
+      
+    </div>
+    
+    <script>
+      // Auto-show toasts with animations
+      document.addEventListener('DOMContentLoaded', function() {
+        const toasts = document.querySelectorAll('.toast-item');
+        toasts.forEach((toast, index) => {
+          setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+              toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+              toast.style.opacity = '0';
+              toast.style.transform = 'translateY(-10px)';
+              
+              setTimeout(() => {
+                toast.remove();
+              }, 300);
+            }, 5000);
+          }, index * 200); // Stagger the appearance
+        });
+      });
+      
+
+    </script>
+  </body>
+</html>

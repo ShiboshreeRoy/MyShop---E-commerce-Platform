@@ -1,0 +1,129 @@
+<div class="bg-white">
+  <div class="max-w-3xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+    <div class="border-b border-gray-200 pb-5">
+      <h1 class="text-3xl font-extrabold tracking-tight text-gray-900">Order #<%= @order.order_number %></h1>
+      <p class="mt-2 text-gray-500">Placed on <%= @order.created_at.strftime("%B %d, %Y") %></p>
+    </div>
+
+    <!-- Order Status -->
+    <div class="mt-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-medium text-gray-900">Order Status</h2>
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
+          <% case @order.status %>
+            <% when 'pending', 'paid' %>
+              bg-blue-100 text-blue-800
+            <% when 'shipped' %>
+              bg-yellow-100 text-yellow-800
+            <% when 'delivered' %>
+              bg-green-100 text-green-800
+            <% when 'cancelled' %>
+              bg-red-100 text-red-800
+            <% else %>
+              bg-gray-100 text-gray-800
+          <% end %>">
+          <%= @order.status.humanize %>
+        </span>
+      </div>
+      <div class="mt-4">
+        <div class="overflow-hidden rounded-full bg-gray-200">
+          <div class="h-2 rounded-full bg-indigo-600" style="width: 
+            <% case @order.status %>
+              <% when 'pending' %> 25%
+              <% when 'paid' %> 50%
+              <% when 'shipped' %> 75%
+              <% when 'delivered' %> 100%
+              <% when 'cancelled' %> 0%
+              <% else %> 0%
+            <% end %>"></div>
+        </div>
+        <div class="mt-2 grid grid-cols-4 text-sm font-medium text-gray-600">
+          <div class="text-left">Pending</div>
+          <div class="text-center">Paid</div>
+          <div class="text-center">Shipped</div>
+          <div class="text-right">Delivered</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Items -->
+    <div class="mt-10">
+      <h2 class="text-lg font-medium text-gray-900">Order Items</h2>
+
+      <div class="mt-6 space-y-6">
+        <% @order.order_items.each do |item| %>
+          <div class="flex items-center border-b border-gray-200 pb-6">
+            <div class="flex-shrink-0">
+              <div class="h-24 w-24 overflow-hidden rounded-md border border-gray-200 bg-gray-200 border-2 border-dashed flex items-center justify-center text-gray-500">
+                Product Image
+              </div>
+            </div>
+
+            <div class="ml-4 flex flex-1 flex-col sm:ml-6">
+              <div>
+                <div class="flex justify-between">
+                  <h4 class="text-sm font-medium text-gray-900"><%= item.name %></h4>
+                  <p class="text-sm font-medium text-gray-900">$<%= item.unit_price %></p>
+                </div>
+                <p class="mt-1 text-sm text-gray-500">Quantity: <%= item.quantity %></p>
+              </div>
+
+              <div class="mt-2 flex flex-1 items-end justify-between text-sm">
+                <p class="text-gray-500">Total: $<%= item.total_price %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="mt-10">
+      <h2 class="text-lg font-medium text-gray-900">Order Summary</h2>
+
+      <div class="mt-6 space-y-4">
+        <div class="flex justify-between">
+          <p class="text-sm text-gray-600">Subtotal</p>
+          <p class="text-sm font-medium text-gray-900">$<%= @order.subtotal %></p>
+        </div>
+        <div class="flex justify-between">
+          <p class="text-sm text-gray-600">Shipping</p>
+          <p class="text-sm font-medium text-gray-900">$<%= @order.shipping_total %></p>
+        </div>
+        <div class="flex justify-between">
+          <p class="text-sm text-gray-600">Discount</p>
+          <p class="text-sm font-medium text-gray-900">-$<%= @order.discount_total %></p>
+        </div>
+        <div class="flex justify-between border-t border-gray-200 pt-4 text-lg font-medium text-gray-900">
+          <p>Total</p>
+          <p>$<%= @order.total %></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shipping Address -->
+    <div class="mt-10">
+      <h2 class="text-lg font-medium text-gray-900">Shipping Address</h2>
+      <div class="mt-4">
+        <p class="text-sm text-gray-900"><%= @order.shipping_address['name'] if @order.shipping_address %></p>
+        <p class="text-sm text-gray-900"><%= @order.shipping_address['street'] if @order.shipping_address %></p>
+        <p class="text-sm text-gray-900">
+          <%= @order.shipping_address['city'] if @order.shipping_address %>,
+          <%= @order.shipping_address['state'] if @order.shipping_address %>
+          <%= @order.shipping_address['zip'] if @order.shipping_address %>
+        </p>
+        <p class="text-sm text-gray-900"><%= @order.shipping_address['country'] if @order.shipping_address %></p>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="mt-10 flex space-x-4">
+      <% if @order.can_cancel? %>
+        <%= button_to 'Cancel Order', order_path(@order), method: :delete, class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700" %>
+      <% end %>
+      <% if @order.can_refund? %>
+        <%= link_to 'Request Return', '#', class: "inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50" %>
+      <% end %>
+    </div>
+  </div>
+</div>

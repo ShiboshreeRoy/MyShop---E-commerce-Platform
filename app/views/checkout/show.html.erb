@@ -1,0 +1,126 @@
+<div class="bg-white">
+  <div class="max-w-3xl mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+    <div class="max-w-xl">
+      <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Order confirmed</h1>
+      <p class="mt-2 text-gray-500">Thanks for shopping with us!</p>
+    </div>
+
+    <div class="mt-12">
+      <div class="rounded-lg border border-gray-200 bg-gray-50 px-4 py-6 sm:px-6">
+        <div class="flow-root">
+          <div class="-my-4 divide-y divide-gray-200">
+            <div class="flex py-4">
+              <div class="flex-shrink-0">
+                <div class="h-24 w-24 overflow-hidden rounded-md border border-gray-200 bg-gray-200 border-2 border-dashed flex items-center justify-center text-gray-500">
+                  Product Image
+                </div>
+              </div>
+
+              <div class="ml-4 flex flex-1 flex-col sm:ml-6">
+                <div>
+                  <div class="flex justify-between">
+                    <h4 class="text-sm font-medium text-gray-900">Basic Tee</h4>
+                    <p class="ml-4 text-sm font-medium text-gray-900">$32.00</p>
+                  </div>
+                  <p class="mt-1 text-sm text-gray-500">Charcoal</p>
+                </div>
+
+                <div class="mt-2 flex flex-1 items-end justify-between text-sm">
+                  <p class="text-gray-500">Qty 1</p>
+
+                  <div class="flex">
+                    <p class="text-gray-500">Standard delivery</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex py-4">
+              <div class="flex-shrink-0">
+                <div class="h-24 w-24 overflow-hidden rounded-md border border-gray-200 bg-gray-200 border-2 border-dashed flex items-center justify-center text-gray-500">
+                  Product Image
+                </div>
+              </div>
+
+              <div class="ml-4 flex flex-1 flex-col sm:ml-6">
+                <div>
+                  <div class="flex justify-between">
+                    <h4 class="text-sm font-medium text-gray-900">Basic Tee</h4>
+                    <p class="ml-4 text-sm font-medium text-gray-900">$32.00</p>
+                  </div>
+                  <p class="mt-1 text-sm text-gray-500">Charcoal</p>
+                </div>
+
+                <div class="mt-2 flex flex-1 items-end justify-between text-sm">
+                  <p class="text-gray-500">Qty 1</p>
+
+                  <div class="flex">
+                    <p class="text-gray-500">Standard delivery</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 space-y-3">
+            <div class="flex justify-between text-base font-medium text-gray-900">
+              <p>Subtotal</p>
+              <p>$64.00</p>
+            </div>
+            <div class="flex justify-between text-base font-medium text-gray-900">
+              <p>Shipping</p>
+              <p>$5.00</p>
+            </div>
+            <div class="flex justify-between text-base font-medium text-gray-900">
+              <p>Tax</p>
+              <p>$5.12</p>
+            </div>
+            <div class="flex justify-between text-base font-medium text-gray-900">
+              <p>Total</p>
+              <p>$74.12</p>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <h2 class="text-sm font-medium text-gray-900">Order information</h2>
+
+            <div class="mt-4 space-y-4 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0">
+              <div>
+                <h3 class="text-sm text-gray-500">Shipping address</h3>
+                <div class="mt-2 text-sm text-gray-900">
+                  <p>John Doe</p>
+                  <p>1234 Main Street</p>
+                  <p>Any City, CA 94111</p>
+                  <p>United States</p>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-sm text-gray-500">Shipping method</h3>
+                <div class="mt-2 text-sm text-gray-900">
+                  <p>Standard delivery</p>
+                  <p>Free shipping</p>
+                  <p class="mt-1 text-gray-500">Estimated delivery: 3-5 business days</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 flex sm:hidden">
+        <%= link_to 'Continue Shopping', products_path, class: "flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700" %>
+      </div>
+
+      <div class="mt-6 hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+        <div class="flex">
+          <%= link_to 'Continue Shopping', products_path, class: "flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50" %>
+        </div>
+        <div class="flex text-sm text-gray-500">
+          Need help? Contact us at
+          <a href="#" class="ml-1 font-medium text-indigo-600 hover:text-indigo-500">support@example.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
