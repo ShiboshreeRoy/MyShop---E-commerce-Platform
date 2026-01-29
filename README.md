@@ -29,8 +29,8 @@ MyShop is a comprehensive e-commerce platform built with Ruby on Rails, featurin
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd shopify_clone
+git clone https://github.com/ShiboshreeRoy/MyShop---E-commerce-Platform.git
+cd MyShop---E-commerce-Platform
 ```
 
 2. Install dependencies:
